@@ -2,60 +2,30 @@ package com.example.converter.android.ui.weight
 
 import android.content.res.Configuration
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.converter.android.models.WeightConverterViewModel
 import com.example.converter.android.ui.layout.LandscapeLayout
 import com.example.converter.android.ui.layout.PortraitLayout
-import com.example.converter.converters.convert
-import com.example.converter.converters.weightRates
-import java.util.Locale
 
 @Composable
-fun WeightConverterScreen() {
-    val weights = listOf("gram", "ounce", "pound", "kg")
-
-    var fromWeight by rememberSaveable { mutableStateOf(weights[0]) }
-    var toWeight by rememberSaveable { mutableStateOf(weights[1]) }
-    var amount by rememberSaveable { mutableStateOf("") }
-    var convertedAmount by rememberSaveable { mutableStateOf("") }
-
-    val updateConversion: (String) -> Unit = { newAmount ->
-        amount = newAmount
-        val amountDouble = amount.toDoubleOrNull() ?: 0.0
-        convertedAmount = if(amountDouble > 0) String.format(Locale.getDefault(), "%.3f",
-            convert(amountDouble, fromWeight, toWeight, weightRates)) else ""
-    }
-
-    val switchValues: () -> Unit = {
-        val temp = fromWeight
-        fromWeight = toWeight
-        toWeight = temp
-        updateConversion(convertedAmount)
-    }
-
-    val onFromWeightChange: (String) -> Unit = { newWeight ->
-        fromWeight = newWeight
-        updateConversion(amount)
-    }
-
-    val onToWeightChange: (String) -> Unit = { newWeight ->
-        toWeight = newWeight
-        updateConversion(amount)
-    }
+fun WeightConverterScreen(viewModel: WeightConverterViewModel = viewModel()) {
+    val uiState by viewModel.uiState.collectAsState()
 
     val isPortrait = LocalConfiguration.current.orientation == Configuration.ORIENTATION_PORTRAIT
 
     if(isPortrait) {
-        PortraitLayout(fromWeight, toWeight, amount, convertedAmount,
-            weights, updateConversion, onFromWeightChange, onToWeightChange, switchValues)
+        PortraitLayout(uiState.from, uiState.to, uiState.amount, uiState.convertedAmount,
+            uiState.values, viewModel::updateAmount, viewModel::onFromWeightChanged,
+            viewModel::onToWeightChanged, viewModel::switchWeights)
     }
     else {
-        LandscapeLayout(fromWeight, toWeight, amount, convertedAmount,
-            weights, updateConversion, onFromWeightChange, onToWeightChange, switchValues)
+        LandscapeLayout(uiState.from, uiState.to, uiState.amount, uiState.convertedAmount,
+            uiState.values, viewModel::updateAmount, viewModel::onFromWeightChanged,
+            viewModel::onToWeightChanged, viewModel::switchWeights)
     }
 }
 

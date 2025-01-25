@@ -28,7 +28,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.converter.android.BuildConfig
 import com.example.converter.android.R
 import com.example.converter.android.SwapButton
 
@@ -120,9 +119,3 @@ fun CurrencyItem(currency: String,
         )
     }
 }
-
-//            SwapButton {
-//                val temp = fromCurrency
-//                fromCurrency = toCurrency
-//                toCurrency = temp
-//            }

@@ -21,9 +21,11 @@ fun CopyButton(value: String) {
     val snackbarHostState = LocalSnackbarHostState.current
     val coroutineScope = rememberCoroutineScope()
     val onCopy: () -> Unit = {
-        clipboardManager.setText(AnnotatedString(value))
-        coroutineScope.launch {
-            snackbarHostState.showSnackbar("Copied: $value")
+        if(value.isNotEmpty()) {
+            clipboardManager.setText(AnnotatedString(value))
+            coroutineScope.launch {
+                snackbarHostState.showSnackbar("Copied: $value")
+            }
         }
     }
     IconButton(onClick = onCopy) {
