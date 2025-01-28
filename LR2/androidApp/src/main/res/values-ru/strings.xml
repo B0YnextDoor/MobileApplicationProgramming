@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="theme_entries">
+        <item>Светлая</item>
+        <item>Тёмная</item>
+    </string-array>
+    <string-array name="font_size_entries">
+        <item>Маленький</item>
+        <item>Средний</item>
+        <item>Большой</item>
+    </string-array>
+    <string-array name="language_entries">
+        <item>Английский</item>
+        <item>Русский</item>
+    </string-array>
+    <string name="title_settings">Настройки</string>
+    <string name="theme_label">Тема</string>
+    <string name="theme_summary">Изменить тему приложения</string>
+    <string name="font_label">Размер шрифта</string>
+    <string name="font_summary">Изменить размер шрифта</string>
+    <string name="lang_label">Язык</string>
+    <string name="lang_summary">Изменить язык приложения</string>
+    <string name="data_label">Очистка данных</string>
+    <string name="data_summary">Очистить все данные приложения</string>
+    <string name="clear_data_title">Очистить данные приложения?</string>
+    <string name="clear_data_message">Все данные будут удалены, а настройки сброшены. Вы уверены?</string>
+    <string name="clear">Очистить</string>
+    <string name="cancel">Отмена</string>
+</resources>

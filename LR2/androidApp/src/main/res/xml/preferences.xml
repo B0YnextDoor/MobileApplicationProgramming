@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+    <Preference
+        app:title=""
+        app:icon="@android:color/transparent"
+        app:layout="@xml/empty_preference_layout" />
+
+    <ListPreference
+        app:key="theme"
+        app:title="@string/theme_label"
+        app:entries="@array/theme_entries"
+        app:entryValues="@array/theme_values"
+        app:defaultValue="light"
+        app:summary="@string/theme_summary"/>
+
+    <ListPreference
+        app:key="fontSize"
+        app:title="@string/font_label"
+        app:entries="@array/font_size_entries"
+        app:entryValues="@array/font_size_values"
+        app:defaultValue="medium"
+        app:summary="@string/font_summary"/>
+
+    <ListPreference
+        app:key="language"
+        app:title="@string/lang_label"
+        app:entries="@array/language_entries"
+        app:entryValues="@array/language_values"
+        app:defaultValue="en"
+        app:summary="@string/lang_summary"/>
+
+    <Preference
+        app:key="clearData"
+        app:title="@string/data_label"
+        app:summary="@string/data_summary" />
+</PreferenceScreen>
